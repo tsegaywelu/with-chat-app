@@ -1,0 +1,38 @@
+/* Add custom styles for the arrows */
+.slick-prev,
+.slick-next {
+  width: 60px; /* Adjust as needed */
+  height: 60px; /* Adjust as needed */
+  background-color: rgba(43, 14, 211, 0.5); /* Adjust background color */
+  color: red; /* Arrow color */
+  border-radius: 50%; /* Make it round */
+  font-size: 18px; /* Adjust font size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+/* // here i will add properties for :hover */
+.slick-prev:hover,
+.slick-next:hover {
+  background-color: rgba(
+    43,
+    14,
+    211,
+    0.8
+  ); /* Adjust background color on hover */
+  color: beige;
+}
+
+/* Styling for the next arrow */
+.slick-next {
+  right: 10px; /* Adjust distance from the right */
+}
+
+/* Styling for the previous arrow */
+.slick-prev {
+  left: 10px; /* Adjust distance from the left */
+}
