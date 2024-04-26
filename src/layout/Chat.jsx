@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Socket from "socket.io-client";
 import "./chat.css";
-
+//for git hub check and check 15 date
 const Chat = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([{ text: "welcome", type: "user" }]);
   const [message, setMessage] = useState("");
   const [socket, setSocket] = useState(null);
 
@@ -11,10 +11,11 @@ const Chat = () => {
     const s = Socket.connect("http://localhost:3000");
 
     s.on("message", (data) => {
+      //this is reciving
       console.log(data);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: data.text, type: "admin" },
+        { text: data.text, type: Math.random() > 0.5 ? "user" : "admin" }, //i am reciving the message i have sent to back-end and displaying as a user on body
       ]);
     });
 
@@ -26,6 +27,7 @@ const Chat = () => {
   }, []);
 
   const sendMessage = () => {
+    // i am sending this to the backend
     if (socket) {
       socket.emit("message", { text: message, type: "user" });
       setMessage("");
@@ -55,13 +57,26 @@ const Chat = () => {
             </p>
           </div>
         ))}
-        <div className="flex justify-center">
+        {/*  i will display the below div to center */}
+        <div className="flex flex-col items-center justify-center gap-6 ">
           <input
             type="text"
             value={message}
+            className="p-4 rounded-md w-1/3 "
             onChange={(e) => setMessage(e.target.value)}
+            placeholder="type your message here"
+            onKeyUp={(e) => {
+              if (e.key === "Enter") {
+                sendMessage();
+              }
+            }}
           />
-          <button onClick={sendMessage}>send</button>
+          <button
+            className="bg-blue-900 p-4 rounded-md w-1/3 flex justify-center items-center"
+            onClick={sendMessage}
+          >
+            send
+          </button>
         </div>
       </div>
     </div>
