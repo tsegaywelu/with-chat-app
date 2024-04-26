@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Socket from "socket.io-client";
 import "./chat.css";
 //for git hub check and check 15 date
+//seconed check github
 const Chat = () => {
   const [messages, setMessages] = useState([{ text: "welcome", type: "user" }]);
   const [message, setMessage] = useState("");
