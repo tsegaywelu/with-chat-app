@@ -17,7 +17,7 @@ import Footer from "./layout/Footer";
 import Lost from "./components/Lost";
 import Chat from "./layout/Chat";
 import UserTypeProvider from "./components/contextprovider/Usertype";
-
+//why is not working
 const App = () => {
   return (
     <Language>
