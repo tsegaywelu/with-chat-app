@@ -2,27 +2,35 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "./Utility/API";
 import { LanguageContext } from "../components/contextprovider/Language";
+import { UserTypeContext } from "./contextprovider/Usertype";
 
 const Login1 = () => {
   const { contextData, setcontextData } = useContext(LanguageContext);
+  const { userType, setUserType } = useContext(UserTypeContext);
   const navigate = useNavigate();
   const [user, setUser] = useState({ email: "", password: "" });
-  const [submiting,setsubmiting]=useState(false)
+  const [submiting, setsubmiting] = useState(false);
   function loguser(e) {
-    setsubmiting(true)
+    setsubmiting(true);
     e.preventDefault();
-    if(user.email==''||user.password==''){
-    return alert("please fill out all the requierd filds to login!")
+    if (user.email == "" || user.password == "") {
+      return alert("please fill out all the requierd filds to login!");
     }
 
     API.Loginuser(user).then((data) => {
       if (data.data.token) {
+        setUserType((d) => ({ ...d, userType: data.data.userType }));
         setcontextData((d) => ({ ...d, token: data.data.token }));
+        console.log(
+          "this is the user" +
+            data.data.username +
+            " and your type is" +
+            data.data.type
+        );
         console.log(data.data.token);
         localStorage.setItem("token", data.data.token);
         navigate("/", { replace: true });
       }
-      //console.log(data)
     });
   }
   return (
@@ -71,7 +79,11 @@ const Login1 = () => {
                       setUser({ ...user, email: e.target.value });
                     }}
                   />
-                  {user.email==''&&submiting&&<small className="text-red-700">this field is required!</small>}
+                  {user.email == "" && submiting && (
+                    <small className="text-red-700">
+                      this field is required!
+                    </small>
+                  )}
                   <div className=" absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                     <svg
                       className="h-5 w-5 text-red-500"
@@ -109,9 +121,12 @@ const Login1 = () => {
                     onChange={(e) => {
                       setUser({ ...user, password: e.target.value });
                     }}
-
                   />
-                   {user.password==''&&submiting&&<small className="text-red-700">this field is required!</small>}
+                  {user.password == "" && submiting && (
+                    <small className="text-red-700">
+                      this field is required!
+                    </small>
+                  )}
                 </div>
               </div>
 

@@ -16,29 +16,32 @@ import Gallery from "./components/Gallery";
 import Footer from "./layout/Footer";
 import Lost from "./components/Lost";
 import Chat from "./layout/Chat";
+import UserTypeProvider from "./components/contextprovider/Usertype";
 
 const App = () => {
   return (
     <Language>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path={"/About"} element={<About />}></Route>
-          <Route path={"/Contact"} element={<Contact />}></Route>
-          <Route path={"/news"} element={<News />}></Route>
-          <Route path={"/login"} element={<Login />}></Route>
-          <Route path={"/postnews"} element={<Postnews />}></Route>
-          <Route path={"/register"} element={<Registration />}></Route>
-          <Route path={"/logout"} element={<Logout />}></Route>
-          <Route path={"/notification"} element={<Notification />}></Route>
-          <Route path={"/gallery"} element={<Gallery />}></Route>
-          <Route path={"/chat"} element={<Chat />}></Route>
+      <UserTypeProvider>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path={"/About"} element={<About />}></Route>
+            <Route path={"/Contact"} element={<Contact />}></Route>
+            <Route path={"/news"} element={<News />}></Route>
+            <Route path={"/login"} element={<Login />}></Route>
+            <Route path={"/postnews"} element={<Postnews />}></Route>
+            <Route path={"/register"} element={<Registration />}></Route>
+            <Route path={"/logout"} element={<Logout />}></Route>
+            <Route path={"/notification"} element={<Notification />}></Route>
+            <Route path={"/gallery"} element={<Gallery />}></Route>
+            <Route path={"/chat"} element={<Chat />}></Route>
 
-          <Route path="*" element={<Lost />}></Route>
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+            <Route path="*" element={<Lost />}></Route>
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </UserTypeProvider>
     </Language>
   );
 };

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Socket from "socket.io-client";
 import "./chat.css";
-//for git hub check and check 15 date
-//seconed check github
-//third check
+
 const Chat = () => {
   const [messages, setMessages] = useState([{ text: "welcome", type: "user" }]);
   const [message, setMessage] = useState("");
   const [socket, setSocket] = useState(null);
+  const mytime = new Date().toLocaleTimeString();
 
   useEffect(() => {
     const s = Socket.connect("http://localhost:3000");
@@ -55,7 +54,7 @@ const Chat = () => {
           >
             <p className="">{msg.text}</p>
             <p className="text-gray-600 text-xs text-right leading-none">
-              8:00 AM
+              {mytime}
             </p>
           </div>
         ))}
