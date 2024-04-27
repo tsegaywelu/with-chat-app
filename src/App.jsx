@@ -18,6 +18,7 @@ import Lost from "./components/Lost";
 import Chat from "./layout/Chat";
 import UserTypeProvider from "./components/contextprovider/Usertype";
 //why is not working
+//still we are not adding why
 const App = () => {
   return (
     <Language>
