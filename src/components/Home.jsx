@@ -27,14 +27,14 @@ const PrevArrow = ({ onClick }) => {
 const Home = () => {
   const { contextData } = useContext(LanguageContext);
   const [news, setNews] = useState([]);
-  const [events,setevents]=useState([]);
+  const [events, setevents] = useState([]);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [sliderAutoplay, setSliderAutoplay] = useState(true);
- //to load videos and images from post database 
+  //to load videos and images from post database
   useEffect(() => {
     API.getnews()
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         setNews(res.data);
       })
       .catch((err) => {
@@ -45,14 +45,13 @@ const Home = () => {
   useEffect(() => {
     API.getevents()
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         setevents(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  
 
   const settings = {
     dots: true,
@@ -126,7 +125,7 @@ const Home = () => {
               )}
               {/* <h3 className="text-2xl font-bold text-gray-950  float-center mb-2 ml-5">{n?.Title}</h3> 
               <p className="text-xl">{n?.description}    <i className="float-end text-sm">7 days ago</i></p> */}
-            {/*   <textarea
+              {/*   <textarea
                 name="comment"
                 id="comments"
                 cols="20"
@@ -151,27 +150,26 @@ const Home = () => {
           ))}
         </Slider>
 
-        <div className="  w-1/3  h-full p-2">{/* for advertisment  */}
+        <div className="  w-1/3  h-full p-2">
+          {/* for advertisment  */}
           <h3 className="text-lg font-bold flex justify-center align-middle relative ">
             {contextData.Language == "English"
               ? "  new notifications"
               : "ሓዱሽ ሓበሬታ"}
           </h3>
           <div>
-           
-         {/* display here the title from event database  */}
-         <a href="">
+            {/* display here the title from event database  */}
+            <a href="">
               <p className=" ">
-              {events.map((k)=>(
-         <ul><li className="flex justify-center align-middle text-blue-700 hover:text-green-600 hover:font-bold">
-          {k?.Title} click here to show more !
-          
-          </li></ul>
-
-         ))}
+                {events.map((k) => (
+                  <ul>
+                    <li className="flex justify-center align-middle text-blue-700 hover:text-green-600 hover:font-bold">
+                      {k?.Title} click here to show more !
+                    </li>
+                  </ul>
+                ))}
               </p>
-         </a>
-         
+            </a>
           </div>
         </div>
       </div>

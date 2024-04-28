@@ -9,7 +9,7 @@ const Login1 = () => {
   const { userType, setUserType } = useContext(UserTypeContext);
   const navigate = useNavigate();
   const [user, setUser] = useState({ email: "", password: "" });
-  const [submiting, setsubmiting] = useState(false);
+  const [submiting, setsubmiting] = useState(false); //for error hundling purpose
   function loguser(e) {
     setsubmiting(true);
     e.preventDefault();
