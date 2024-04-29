@@ -19,6 +19,7 @@ const Login1 = () => {
 
     API.Loginuser(user).then((data) => {
       if (data.data.token) {
+        
         setUserType((d) => ({ ...d, userType: data.data.userType }));
         setcontextData((d) => ({ ...d, token: data.data.token }));
         console.log(
