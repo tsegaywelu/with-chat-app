@@ -3,27 +3,28 @@ const News = require("../models/News");
 const myevent = require("../models/Event");
 const Usersadd = require("../models/Users");
 const jwt = require("jsonwebtoken");
-const allmessage=require("../models/message")
+const allmessage = require("../models/message");
+const bcrypt = require("bcrypt");
+
 const addnews = async (req, res) => {
   /* console.log(req.body,req.files.myfile); */
 
   console.log(req.files);
 
-
-
   const { Title, description } = req.body;
-  if(!req.files) return res.status(400).send("the fiels must fullfill perfectly!")
-  const {myfile}=req.files
+  if (!req.files)
+    return res.status(400).send("the fiels must fullfill perfectly!");
+  const { myfile } = req.files;
   //moving the file to upload folder from front end
-  if(!myfile||Title.length==0 || description.length==0) return res.status(400).send('please fill all spaces')
-    await myfile.mv(`./uploads/${myfile.name}`);
-  
+  if (!myfile || Title.length == 0 || description.length == 0)
+    return res.status(400).send("please fill all spaces");
+  await myfile.mv(`./uploads/${myfile.name}`);
+
   //inserting to db golden
   const newnews = new News({ Title, description, imageUrl: myfile?.name });
   await newnews.save();
 };
 const addevent = async (req, res) => {
-
   /* console.log(req.body,req.files.myfile); */
 
   console.log(req.files);
@@ -43,19 +44,24 @@ const getnews = async (req, res) => {
   const news = await News.find();
   return res.json(news); //return all news
 };
-const getevent=async (req,res)=>{
-  const events=await myevent.find()
+const getevent = async (req, res) => {
+  const events = await myevent.find();
   res.json(events);
-}
+};
 
 //insert the user email,password,name to db
 const Registeruser = async (req, res) => {
-  console.log('you are registering ');
+  //here i will stroe the password in hash format
+  const secret = "$2a$10$67iR.O31JUO9J4gRpQyWOe"; //this is the secret to encrypt the password
+
   const { name, email, password } = req.body;
-  console.table({ name, email, password });
-  const user = new Usersadd({ name, email, password });
+  const user = new Usersadd({
+    name,
+    email,
+    password: await bcrypt.hash(password, secret),
+  });
   await user.save();
-  
+
   res.send("user added succesfully to db");
 };
 
@@ -63,13 +69,13 @@ const Registeruser = async (req, res) => {
 
 const loguser = async (req, res) => {
   const { email, password } = req.body;
-  console.table({ email, password });
+  const user = await Usersadd.findOne({ email });
 
-  const user = await Usersadd.findOne({ email, password });
+  //here i will compare the password in hash format
+  const comparePassword = await bcrypt.compare(password, user.password);
 
   //if password is correct then api will send jwt to the front end    so please help me codeium help me
-  if (user) {
-    console.log("this "+user.name+"is created at"+user.createdAt)
+  if (user && comparePassword) {
     //jenerate jwt here
     const payload = {
       id: user._id, //because default id is _id  on mongo database
@@ -81,7 +87,11 @@ const loguser = async (req, res) => {
       (err, token) => {
         //the jwt expires in 10 hour even if the user is actively using the app
         if (err) throw err;
-        res.json({ token });
+        //here what i want is i want to sent usertype and username and token
+        //so please help me
+        console.table({ type: user.type, username: user.name, token });
+        res.send({ type: user.type, username: user.name, token });
+        res.json({ type: user.type, username: user.name, token });
       }
     );
   } else {
@@ -98,16 +108,15 @@ const checktoken = async (req, res) => {
     res.status(200).send(user);
   });
 };
-const acceptmessage=async (req,res)=>{
-  console.table(req.body)
-  const{name,email,message}=req.body
+const acceptmessage = async (req, res) => {
+  console.table(req.body);
+  const { name, email, message } = req.body;
 
-const savemessage=new allmessage({name,email,message})
-await savemessage.save();
+  const savemessage = new allmessage({ name, email, message });
+  await savemessage.save();
 
-res.status(200).send("your message is created at  " + savemessage.createdAt)
-
-}
+  res.status(200).send("your message is created at  " + savemessage.createdAt);
+};
 
 module.exports = {
   addnews,
@@ -117,5 +126,5 @@ module.exports = {
   checktoken,
   addevent,
   getevent,
-  acceptmessage
+  acceptmessage,
 };
