@@ -19,17 +19,22 @@ const Login1 = () => {
 
     API.Loginuser(user).then((data) => {
       if (data.data.token) {
-        setUserType((d) => ({ ...d, userType: data.data.userType }));
+        console.table({
+          type: data.data.type,
+          username: data.data.username,
+          token: data.data.token,
+        });
+        setUserType((d) => ({
+          ...d,
+          userType: data.data.type,
+          username: data.data.username,
+          token: data.data.token,
+        }));
         setcontextData((d) => ({ ...d, token: data.data.token }));
-        console.log(
-          "this is the user" +
-            data.data.username +
-            " and your type is" +
-            data.data.type
-        );
+
         console.log(data.data.token);
         localStorage.setItem("token", data.data.token);
-        navigate("/", { replace: true });
+        //navigate("/", { replace: true });
       }
     });
   }

@@ -6,6 +6,7 @@ const UserTypeProvider = ({ children }) => {
   const [userType, setUserType] = useState({
     userType: "",
     username: "",
+    token: "",
   });
 
   return (
