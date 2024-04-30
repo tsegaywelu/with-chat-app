@@ -2,12 +2,15 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { LanguageContext } from "../components/contextprovider/Language";
+import { UserTypeContext } from "../components/contextprovider/Usertype";
 const Header = () => {
   /*  const [token, setToken] = useState(localStorage.getItem("token")); */
   /*   useEffect(() => {
     // Update token in state when it changes in localStorage
     setToken(localStorage.getItem("token"));
   }, [token]); */
+  const {userType} = useContext(UserTypeContext)
+  console.log(userType);
   const { contextData, setcontextData } = useContext(LanguageContext);
 
   console.log(contextData.Language);
@@ -42,8 +45,11 @@ const Header = () => {
       
         
         </Link> */}
+        <Link to="/chat">
+          {contextData.Language == "English" ? "chat " : "መልእክቲ   ይጽሓፉ"}
+        </Link>
 
-        {contextData.token ? (
+        {userType.userType=="admin" ? (
           <Link to="/postnews">
           {contextData.Language == "English" ? "Post News" : "ዜና የእትው"}
         </Link>

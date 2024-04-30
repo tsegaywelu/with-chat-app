@@ -7,6 +7,7 @@ const UserTypeProvider = ({ children }) => {
     userType: "",
     username: "",
     token: "",
+    useremail: "",
   });
 
   return (

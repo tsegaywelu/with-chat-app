@@ -6,15 +6,36 @@ const Footer = () => {
     <div className="max-w-screen-lg px-4 sm:px-6 text-gray-800 sm:grid md:grid-cols-4 sm:grid-cols-2 mx-auto">
         <div className="p-5">
             <h3 className="font-bold text-xl text-indigo-600">event and promotion</h3>
+            <div>
+            <a className="my-3 block" href="/">home <span className="text-teal-600 text-xs p-1"></span></a><a
+                className="my-3 block" href="/about">about us  <span className="text-teal-600 text-xs p-1"></span></a><a
+                className="my-3 block" href="/contact">contact us  <span className="text-teal-600 text-xs p-1">New</span></a>
+            </div>
+
         </div>
         
         <div className="p-5">
-            <div className="text-sm uppercase text-indigo-600 font-bold">Resources</div>
-            <a className="my-3 block" href="/#">Documentation <span className="text-teal-600 text-xs p-1"></span></a><a
-                className="my-3 block" href="/#">Tutorials <span className="text-teal-600 text-xs p-1"></span></a><a
-                className="my-3 block" href="/#">Support <span className="text-teal-600 text-xs p-1">New</span></a>
+            <div className="text-sm uppercase text-indigo-600 font-bold">pages</div>
+              <div className='flex gap-10'>
+              <div>
+            <a className="my-3 block" href="/">home <span className="text-teal-600 text-xs p-1"></span></a><a
+                className="my-3 block" href="/about">about us  <span className="text-teal-600 text-xs p-1"></span></a><a
+                className="my-3 block" href="/contact">contact us  <span className="text-teal-600 text-xs p-1">New</span></a>
+            </div>
+
+
+
+            
+                <div>
+                <a className="my-3 block" href="/news">news  <span className="text-teal-600 text-xs p-1"></span></a>
+                <a className="my-3 block" href="/gallery">gallery  <span className="text-teal-600 text-xs p-1"></span></a>
+                <a
+                className="my-3 block" href="/chat">chat with us  <span className="text-teal-600 text-xs p-1"></span></a>
+                </div>
+
+              </div>
         </div>
-        <div className="p-5">
+        <div className="p-5 ">
             <div className="text-sm uppercase text-indigo-600 font-bold">Support</div>
             <a className="my-3 block" href="/#">Help Center <span className="text-teal-600 text-xs p-1"></span></a><a
                 className="my-3 block" href="/#">Privacy Policy <span className="text-teal-600 text-xs p-1"></span></a><a

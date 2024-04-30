@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext ,} from "react";
+import { useNavigate } from "react-router-dom";
 import Socket from "socket.io-client";
 import "./chat.css";
+import { UserTypeContext } from "../components/contextprovider/Usertype";
 
 const Chat = () => {
-  const [messages, setMessages] = useState([{ text: "welcome", type: "user" }]);
+  //here user or admin must login to chat 
+ 
+  const {userType} = useContext(UserTypeContext)
+
+ 
+  console.log(userType);
+  const [messages, setMessages] = useState([{ text: "welcome", type: userType.userType }]);
   const [message, setMessage] = useState("");
   const [socket, setSocket] = useState(null);
   const mytime = new Date().toLocaleTimeString();
@@ -13,10 +21,10 @@ const Chat = () => {
 
     s.on("message", (data) => {
       //this is reciving
-      console.log(data);
+      console.log("your type is "+data.type);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: data.text, type: Math.random() > 0.5 ? "user" : "admin" }, //i am reciving the message i have sent to back-end and displaying as a user on body
+        { text: data.text, type: data.type }, //i am reciving the message i have sent to back-end and displaying as a user on body
       ]);
     });
 
@@ -30,7 +38,9 @@ const Chat = () => {
   const sendMessage = () => {
     // i am sending this to the backend
     if (socket) {
-      socket.emit("message", { text: message, type: "user" });
+      socket.emit("message", { text: message, type: userType.userType,sender:userType.username ,
+        senderemail:userType.useremail
+        });
       setMessage("");
     }
   };

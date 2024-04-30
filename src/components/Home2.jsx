@@ -177,7 +177,7 @@ const Home = () => {
         </div>  
 
       </div>
-    di
+    
       <div>
         <ul className="grid gap-8 grid-cols-2 lg:grid-cols-3 overflow-hidden mt-14 ">
           {news?.map((n) => (

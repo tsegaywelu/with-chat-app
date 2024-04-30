@@ -19,26 +19,34 @@ const Login1 = () => {
 
     API.Loginuser(user).then((data) => {
       if (data.data.token) {
-        console.table({
-          type: data.data.type,
-          username: data.data.username,
-          token: data.data.token,
-        });
         setUserType((d) => ({
           ...d,
           userType: data.data.type,
           username: data.data.username,
           token: data.data.token,
+          useremail: data.data.useremail,
         }));
+        //  console.table({
+        //   type: data.data.type,
+        //   username: data.data.username,
+        //   token: data.data.token,
+        //    useremail: data.data.useremail,
+        // }); 
+        
         setcontextData((d) => ({ ...d, token: data.data.token }));
+        //i am making the usertypeconext.jsx  useless  because when page refresh every thing becomes empty
 
-        console.log(data.data.token);
+        localStorage.setItem("userType",data.data.type)
+        localStorage.setItem("username",data.data.username)
+        localStorage.setItem("useremail",data.data.useremail)
+     
         localStorage.setItem("token", data.data.token);
-        //navigate("/", { replace: true });
+        navigate("/", { replace: true });
       }
     });
   }
   return (
+    
     <div className="bg-gray-50">
       f <div className="mb-20 bg-red-600 "> </div>
       <div className="min-h-screen bg-gray-50 flex flex-col justify-middle py-0 sm:px-6 lg:px-8 ">
