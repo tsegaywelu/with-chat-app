@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     password: {
       type: String,
@@ -18,7 +19,7 @@ const userSchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      default: "user",
+      default: "admin",
     },
     //here i will always add type =user and type =admin
   },

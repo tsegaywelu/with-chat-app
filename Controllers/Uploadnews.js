@@ -72,6 +72,7 @@ const loguser = async (req, res) => {
   const user = await Usersadd.findOne({ email });
 
   //here i will compare the password in hash format
+  if (user == null) return res.status(404).send("there is no user with this email");
   const comparePassword = await bcrypt.compare(password, user.password);
 
   //if password is correct then api will send jwt to the front end    so please help me codeium help me
@@ -89,13 +90,13 @@ const loguser = async (req, res) => {
         if (err) throw err;
         //here what i want is i want to sent usertype and username and token
         //so please help me
-        console.table({ type: user.type, username: user.name, token });
-        res.send({ type: user.type, username: user.name, token });
-        res.json({ type: user.type, username: user.name, token });
+        console.table({ type: user.type, username: user.name, token ,useremail:user. email});
+        res.send({ type: user.type, username: user.name, token,useremail:user. email });
+        res.json({ type: user.type, username: user.name, token,useremail:user. email });
       }
     );
   } else {
-    res.status(404).send("user not found");
+    res.status(404).send("incoorect password or email");
   }
 };
 

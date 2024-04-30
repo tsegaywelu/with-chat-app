@@ -2,7 +2,7 @@ const Usersadd=require('../models/Users')
 
 
 const jwt=require('jsonwebtoken')
-console.log(jwt)
+//console.log(jwt)
 async function auth(req,res,next){//this is middlw ware 
 
 const auth=req.headers.auth  //this auth variable is comming from front end 

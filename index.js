@@ -1,10 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
-//this is for socket
-//for the second time
-//for the third time
+
+const initializeSocket = require("./Controllers/sockotconnection");
 const app = express();
+const server = http.createServer(app);
+
+// Initialize socket.io
+const io = initializeSocket(server);
+
+
+//i will put this in sparate page 
+/* const app = express();
 const server = http.createServer(app);
 const socketio = require("socket.io");
 const io = socketio(server, {
@@ -17,9 +24,11 @@ const io = socketio(server, {
 io.on("connection", (socket) => {
   socket.on("message", (data) => {
     console.log(data);
+    // i will insert this to db messsage
+    
     io.emit("message", data);
   });
-});
+});  */
 
 app.use(cors());
 const bodyParser = require("body-parser");
