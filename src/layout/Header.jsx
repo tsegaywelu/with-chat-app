@@ -17,7 +17,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className={"flex justify-evenly p-3 items-center   shadow-lg"}>
+      <div className={"flex justify-evenly p-3 items-center   shadow-lg m"}>
         <img src="./logo2.jpg" alt="image loading " width={50} height={50} />
         <Link to="/">
           {contextData.Language == "English" ? "Home" : "ዋና ገጽ"}

@@ -17,7 +17,7 @@ const Chat = () => {
   const mytime = new Date().toLocaleTimeString();
 
   useEffect(() => {
-    const s = Socket.connect("http://localhost:3000");
+    const s = Socket.connect("http://192.168.137.114:3000");
 
     s.on("message", (data) => {
       //this is reciving

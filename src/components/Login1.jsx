@@ -19,13 +19,13 @@ const Login1 = () => {
 
     API.Loginuser(user).then((data) => {
       if (data.data.token) {
-        setUserType((d) => ({
+        /* setUserType((d) => ({
           ...d,
           userType: data.data.type,
           username: data.data.username,
           token: data.data.token,
           useremail: data.data.useremail,
-        }));
+        })); */
         //  console.table({
         //   type: data.data.type,
         //   username: data.data.username,

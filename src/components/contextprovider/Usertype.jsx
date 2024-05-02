@@ -4,10 +4,10 @@ export const UserTypeContext = createContext();
 
 const UserTypeProvider = ({ children }) => {
   const [userType, setUserType] = useState({
-    userType: "",
-    username: "",
-    token: "",
-    useremail: "",
+    userType: localStorage.getItem("userType"),
+    username: localStorage.getItem("username"),
+    token: localStorage.getItem('token'),
+    useremail: localStorage.getItem("useremail"),
   });
 
   return (

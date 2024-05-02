@@ -5,7 +5,11 @@ import { LanguageContext } from "../components/contextprovider/Language";
 const Logout = () => {
   const { setcontextData } = useContext(LanguageContext);
   // Clear local storage
+  localStorage.removeItem("username");
+  localStorage.removeItem("userType");
+  localStorage.removeItem("useremail");
   localStorage.removeItem("token");
+
   setcontextData((d) => ({ ...d, token: undefined }));
   // Redirect to login
   return <Navigate to="/login" />;
