@@ -24,10 +24,11 @@ const socketio = require("socket.io");
 function initializeSocket(server) {
   const io = socketio(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: ["http://localhost:5173", "http://192.168.137.114:5173"],
       methods: ["GET", "POST"],
     },
   });
+  
 
   io.on("connection", (socket) => {
     socket.on("message", async (data) => {

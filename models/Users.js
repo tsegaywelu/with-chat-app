@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      default: "admin",
+      default: "user",
     },
     //here i will always add type =user and type =admin
   },
